@@ -3,6 +3,8 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { FileText, Zap, Brain, MessageSquare, Upload, Cpu, BookOpen, Play, X, ArrowRight } from "lucide-react"
+import Navbar from "@/app/components/usable/navbar"
+import Footer from "@/app/components/usable/footer"
 
 export default function LandingPage() {
   const [selectedFeature, setSelectedFeature] = useState(null)
@@ -101,92 +103,42 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen text-gray-900 overflow-hidden">
-      {/* Colorful Background with Red-Yellow Gradient */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-orange-50 via-yellow-50 to-red-50" />
-
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
-        <motion.div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-red-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
-          animate={{
-            y: [0, 50, 0],
-            x: [0, 30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-96 h-96 bg-yellow-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
-          animate={{
-            y: [0, -50, 0],
-            x: [0, -30, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 left-1/2 w-96 h-96 bg-orange-400 rounded-full mix-blend-multiply filter blur-3xl opacity-15"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, 50, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+      {/* Navbar */}
+      <Navbar />
 
       {/* Hero Section */}
-      <motion.section
-        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20"
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        variants={containerVariants}
+      <section
+        className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-40"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(255,255,255,0.95) 0%, rgba(245,245,245,0.95) 100%)",
+          backdropFilter: "blur(4px)",
+        }}
       >
-        <motion.div
-          className="text-center max-w-4xl mx-auto"
-          variants={containerVariants}
-        >
-          <motion.h1
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-red-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent"
-            variants={itemVariants}
-          >
+        <div className="text-center mx-auto w-full max-w-5xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-7xl font-extrabold mb-8 text-black leading-tight tracking-tight font-sans">
             Turn Documents into Knowledge with AI
-          </motion.h1>
-
-          <motion.p
-            className="text-lg sm:text-xl text-gray-700 font-semibold mb-8 leading-relaxed"
-            variants={itemVariants}
-          >
+          </h1>
+          <p className="text-2xl sm:text-2xl font-medium mb-10 text-gray-600 leading-relaxed font-serif">
             Upload. Understand. Interact — PaperSnapX transforms your notes, PDFs, and slides into summaries, quizzes,
             and chat-ready insights.
-          </motion.p>
-
-          <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center" variants={itemVariants}>
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={() => scrollToSection("cta")}
-              className="px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:bg-red-600 hover:text-white hover:shadow-2xl hover:shadow-red-500/50 hover:scale-105 active:scale-95"
+              className="px-8 py-4 bg-black text-white font-semibold rounded-lg transition-all duration-300 transform hover:bg-white hover:text-black hover:shadow-2xl hover:scale-105 active:scale-95 border border-black"
             >
               Get Started
             </button>
             <button
               onClick={() => scrollToSection("demo")}
-              className="px-8 py-4 border-2 border-orange-600 text-orange-600 font-semibold rounded-lg transition-all duration-300 active:scale-95 hover:bg-teal-500 hover:text-white"
+              className="px-8 py-4 bg-white text-black font-semibold rounded-lg transition-all duration-300 active:scale-95 hover:bg-red-600 hover:text-white border border-black"
             >
               Check Demo
             </button>
-          </motion.div>
-        </motion.div>
-      </motion.section>
+          </div>
+        </div>
+      </section>
 
       {/* Feature Highlights Section */}
       <motion.section
@@ -345,7 +297,7 @@ export default function LandingPage() {
           <motion.div className="flex justify-center mt-8" variants={itemVariants}>
             <button
               onClick={() => scrollToSection("cta")}
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105 active:scale-95"
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 transform hover:bg-blue-200 hover:text-black active:scale-95"
             >
               Try It Yourself
             </button>
@@ -457,26 +409,40 @@ export default function LandingPage() {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.8, opacity: 0, y: 20 }}
           >
-            {features.map((feature) => {
-              if (feature.id === selectedFeature) {
-                const Icon = feature.icon
-                return (
-                  <div key={feature.id}>
-                    <div className="flex items-center justify-between mb-4">
+            {(() => {
+              const feature = features.find((f) => f.id === selectedFeature)
+              if (!feature) return null
+              const Icon = feature.icon
+              return (
+                <>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-4">
                       <Icon className={`w-12 h-12 ${feature.accentColor}`} />
-                      <button
-                        onClick={() => setSelectedFeature(null)}
-                        className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                      >
-                        <X className="w-6 h-6" />
-                      </button>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                        <p className="text-gray-600">{feature.description}</p>
+                      </div>
                     </div>
-                    <h3 className="text-2xl font-bold mb-4 text-gray-900">{feature.title}</h3>
-                    <p className="text-gray-700 text-lg leading-relaxed font-medium">{feature.details}</p>
+                    <button
+                      onClick={() => setSelectedFeature(null)}
+                      className="p-2 rounded-full hover:bg-gray-100"
+                      aria-label="Close"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
                   </div>
-                )
-              }
-            })}
+                  <p className="text-gray-700 mb-4">{feature.details}</p>
+                  <div className="flex justify-end">
+                    <button
+                      onClick={() => setSelectedFeature(null)}
+                      className="px-4 py-2 bg-gray-100 rounded-md font-medium hover:bg-gray-200"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </>
+              )
+            })()}
           </motion.div>
         </motion.div>
       )}
@@ -484,38 +450,32 @@ export default function LandingPage() {
       {/* Video Modal */}
       {isVideoOpen && (
         <motion.div
-          className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 backdrop-blur-sm"
+          className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 backdrop-blur-sm"
           onClick={() => setIsVideoOpen(false)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="relative w-full max-w-4xl aspect-video"
+            className="bg-black rounded-xl overflow-hidden w-full max-w-3xl aspect-video"
             onClick={(e) => e.stopPropagation()}
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.95 }}
           >
-            <button
-              onClick={() => setIsVideoOpen(false)}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
             <iframe
-              width="100%"
-              height="100%"
+              className="w-full h-full"
               src="https://www.youtube.com/embed/dQw4w9WgXcQ"
               title="PaperSnapX Demo"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="rounded-lg"
             />
           </motion.div>
         </motion.div>
       )}
+
+      <Footer />
     </div>
   )
 }
