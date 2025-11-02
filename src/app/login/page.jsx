@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { AuthLayout } from "@/app/login/components/auth-layout"
 import { SignInForm } from "@/app/login/components/sign-in-form"
 import { SignUpForm } from "@/app/login/components/sign-up-form"
@@ -8,6 +9,7 @@ import { ForgotPasswordForm } from "@/app/login/components/forgot-password-form"
 import { SuccessMessage } from "@/app/login/components/success-message"
 
 export default function SignIn() {
+  const router = useRouter()
   const [view, setView] = useState("signin")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -43,9 +45,10 @@ export default function SignIn() {
     setTimeout(() => {
       setIsLoading(false)
       setView("signin-success")
+      // navigate client-side to dashboard after showing success briefly
       setTimeout(() => {
-        window.location.href = "/dashboard"
-      }, 2000)
+        router.push("/dashboard")
+      }, 1200)
     }, 1000)
   }
 
@@ -57,9 +60,10 @@ export default function SignIn() {
     setTimeout(() => {
       setIsLoading(false)
       setView("signup-success")
+      // navigate client-side to dashboard after showing success briefly
       setTimeout(() => {
-        window.location.href = "/dashboard"
-      }, 2000)
+        router.push("/dashboard")
+      }, 1200)
     }, 1000)
   }
 

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { FileText, Zap, Brain, MessageSquare, Upload, Cpu, BookOpen, Play, X, ArrowRight } from "lucide-react"
 import Navbar from "@/app/components/usable/navbar"
@@ -9,6 +10,7 @@ import Footer from "@/app/components/usable/footer"
 export default function LandingPage() {
   const [selectedFeature, setSelectedFeature] = useState(null)
   const [isVideoOpen, setIsVideoOpen] = useState(false)
+  const router = useRouter()
 
   const features = [
     {
@@ -125,7 +127,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
-              onClick={() => scrollToSection("cta")}
+              onClick={() => router.push("/login")}
               className="px-8 py-4 bg-black text-white font-semibold rounded-lg transition-all duration-300 transform hover:bg-white hover:text-black hover:shadow-2xl hover:scale-105 active:scale-95 border border-black"
             >
               Get Started
@@ -382,6 +384,7 @@ export default function LandingPage() {
                 Join thousands of students and professionals transforming their learning experience.
               </p>
               <motion.button
+                onClick={() => router.push("/login")}
                 className="px-10 py-4 bg-white text-purple-600 font-bold rounded-lg hover:shadow-2xl transition-all duration-300 inline-flex items-center gap-2"
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}

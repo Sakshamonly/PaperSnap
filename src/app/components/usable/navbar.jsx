@@ -1,15 +1,19 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
+  const router = useRouter()
+
   const navLinks = [
     { label: "Features", href: "#features" },
-    { label: "Chat ", href: "#chat" },
+    // chat should scroll to the 3-steps section on the homepage
+    { label: "Chat", href: "#how-it-works" },
     { label: "How It Works", href: "#how-it-works" },
     { label: "Guides", href: "/guide" },
   ]
@@ -19,11 +23,21 @@ export default function Navbar() {
       const element = document.querySelector(href)
       if (element) {
         element.scrollIntoView({ behavior: "smooth" })
+        setIsOpen(false)
+        return
       }
+
+      // If the anchor isn't on the current page (user is on another route),
+      // navigate to the homepage with the hash so the browser will scroll there.
+      // e.g. '/#how-it-works'
+      router.push(`/${href}`)
       setIsOpen(false)
-    } else {
-      window.location.href = href
+      return
     }
+
+    // non-hash navigation: use router for client-side transition
+    router.push(href)
+    setIsOpen(false)
   }
 
   return (
